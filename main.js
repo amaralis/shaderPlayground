@@ -45,7 +45,7 @@ scene.add(plane);
 scene.add(sphere);
 scene.add(cube);
 sphere.position.x = - 50;
-sphere.rotation.y = Math.PI;
+sphere.rotation.y = Math.PI / 1.2;
 cube.position.x = 50;
 
 // Testing light
@@ -133,11 +133,11 @@ const gui = new dat.GUI();
 gui.closed = false;
 
 const folder1 = gui.addFolder('Cube');
-folder1.open();
+// folder1.open();
 const folder2 = gui.addFolder('Plane');
-folder2.open();
+// folder2.open();
 const folder3 = gui.addFolder('Sphere');
-folder3.open();
+// folder3.open();
 
 folder1.add(cube.position, 'x', -10, 10, 0.1);
 folder1.add(cube.position, 'y', -10, 10, 0.1);

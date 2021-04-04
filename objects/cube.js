@@ -1,8 +1,8 @@
 import * as THREE from '../node_modules/three/build/three.module.js';
-import vert from '../shaders/openSimplex3d/vert.js';
-import frag from '../shaders/openSimplex3d/frag.js';
+import vert from '../shaders/openSimplexTiled/vert.js';
+import frag from '../shaders/openSimplexTiled/frag.js';
 
-const cubeGeo = new THREE.BoxGeometry(3.0, 3.0, 3.0);
+const cubeGeo = new THREE.BoxGeometry(10.0, 10.0, 10.0);
 
 // Uniforms to pass into the shader
 

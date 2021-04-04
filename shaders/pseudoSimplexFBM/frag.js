@@ -122,28 +122,31 @@ float normalize01(float value){
 }
 
 void main() {
-    vec2 st = gl_FragCoord.xy/u_Resolution;
     vec2 uv = v_Uv;
-   
-    // uv = (gl_FragCoord.xy*2.-u_Resolution)/min(u_Resolution.x,u_Resolution.y);
+    
     float scale = 4.0;
-    uv *= scale;
     float frequency = 1.0;
     float timeMult = 0.2;
     float lacunarity = 2.0;
     float persistence = 0.5;
     float offset = 1.0;
 
-    // vec4 noise = vec4(bccNoiseClassic(vec3(uv.x, uv.y, 0.0)));
-    // vec4 noise1 = vec4(bccNoiseClassic(vec3(offset * 1.0 + uv.x * applyFrequency(lacunarity, 0.0), offset * 1.0 + uv.y * applyFrequency(lacunarity, 0.0), 0.0))) * applyAmplitude(persistence, 0.0);
-    // vec4 noise2 = vec4(bccNoiseClassic(vec3(offset * 1.0 + uv.x * applyFrequency(lacunarity, 1.0), offset * 1.0 + uv.y * applyFrequency(lacunarity, 1.0), 0.0))) * applyAmplitude(persistence, 1.0);
-    // vec4 noise3 = vec4(bccNoiseClassic(vec3(offset * 1.0 + uv.x * applyFrequency(lacunarity, 2.0), offset * 1.0 + uv.y * applyFrequency(lacunarity, 2.0), 0.0))) * applyAmplitude(persistence, 3.0);
-    // vec4 noise4 = vec4(bccNoiseClassic(vec3(offset * 1.0 + uv.x * applyFrequency(lacunarity, 3.0), offset * 1.0 + uv.y * applyFrequency(lacunarity, 3.0), 0.0))) * applyAmplitude(persistence, 4.0);
+    // Use fragcoords if noise should be relative to entire screen instead of object uv
+    // vec2 P = gl_FragCoord.xy / u_Resolution.y * scale - 1.0;
     
-    vec4 noise1 = vec4(bccNoisePlaneFirst(vec3(offset * 1.0 + uv.x * applyFrequency(lacunarity, 0.0), offset * 1.0 + uv.y * applyFrequency(lacunarity, 0.0), 0.0))) * applyAmplitude(persistence, 0.0);
-    vec4 noise2 = vec4(bccNoisePlaneFirst(vec3(offset * 2.0 + uv.x * applyFrequency(lacunarity, 1.0), offset * 2.0 + uv.y * applyFrequency(lacunarity, 1.0), 0.0))) * applyAmplitude(persistence, 1.0);
-    vec4 noise3 = vec4(bccNoisePlaneFirst(vec3(offset * 3.0 + uv.x * applyFrequency(lacunarity, 2.0), offset * 3.0 + uv.y * applyFrequency(lacunarity, 2.0), 0.0))) * applyAmplitude(persistence, 3.0);
-    vec4 noise4 = vec4(bccNoisePlaneFirst(vec3(offset * 4.0 + uv.x * applyFrequency(lacunarity, 3.0), offset * 4.0 + uv.y * applyFrequency(lacunarity, 3.0), 0.0))) * applyAmplitude(persistence, 4.0);
+    // Use uv coords if noise should be relative to uv instead of entire screen
+    vec2 P = uv * scale;  
+
+    // vec4 noise = vec4(bccNoiseClassic(vec3(uv.x, uv.y, 0.0)));
+    // vec4 noise1 = vec4(bccNoiseClassic(vec3(offset * 1.0 + P.x * applyFrequency(lacunarity, 0.0), offset * 1.0 + P.y * applyFrequency(lacunarity, 0.0), 0.0))) * applyAmplitude(persistence, 0.0);
+    // vec4 noise2 = vec4(bccNoiseClassic(vec3(offset * 1.0 + P.x * applyFrequency(lacunarity, 1.0), offset * 1.0 + P.y * applyFrequency(lacunarity, 1.0), 0.0))) * applyAmplitude(persistence, 1.0);
+    // vec4 noise3 = vec4(bccNoiseClassic(vec3(offset * 1.0 + P.x * applyFrequency(lacunarity, 2.0), offset * 1.0 + P.y * applyFrequency(lacunarity, 2.0), 0.0))) * applyAmplitude(persistence, 3.0);
+    // vec4 noise4 = vec4(bccNoiseClassic(vec3(offset * 1.0 + P.x * applyFrequency(lacunarity, 3.0), offset * 1.0 + P.y * applyFrequency(lacunarity, 3.0), 0.0))) * applyAmplitude(persistence, 4.0);
+    
+    vec4 noise1 = vec4(bccNoisePlaneFirst(vec3(offset * 1.0 + P.x * applyFrequency(lacunarity, 0.0), offset * 1.0 + P.y * applyFrequency(lacunarity, 0.0), 0.0))) * applyAmplitude(persistence, 0.0);
+    vec4 noise2 = vec4(bccNoisePlaneFirst(vec3(offset * 2.0 + P.x * applyFrequency(lacunarity, 1.0), offset * 2.0 + P.y * applyFrequency(lacunarity, 1.0), 0.0))) * applyAmplitude(persistence, 1.0);
+    vec4 noise3 = vec4(bccNoisePlaneFirst(vec3(offset * 3.0 + P.x * applyFrequency(lacunarity, 2.0), offset * 3.0 + P.y * applyFrequency(lacunarity, 2.0), 0.0))) * applyAmplitude(persistence, 3.0);
+    vec4 noise4 = vec4(bccNoisePlaneFirst(vec3(offset * 4.0 + P.x * applyFrequency(lacunarity, 3.0), offset * 4.0 + P.y * applyFrequency(lacunarity, 3.0), 0.0))) * applyAmplitude(persistence, 4.0);
     
     // gl_FragColor = vec4(vec3(normalize01(noise1.w)), 1.0);
     // gl_FragColor = vec4(vec3(normalize01(noise2.w)), 1.0);
