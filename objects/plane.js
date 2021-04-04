@@ -1,10 +1,10 @@
 import * as THREE from '../node_modules/three/build/three.module.js';
-import vert from '../shaders/openSimplexTiledLooping/vert.js';
-import frag from '../shaders/openSimplexTiledLooping/frag.js';
+import vert from '../shaders/openSimplexLooping/vert.js';
+import frag from '../shaders/openSimplexLooping/frag.js';
 
 // const planeGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
 // const planeGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
-const planeGeometry = new THREE.PlaneGeometry(30, 30.0);
+const planeGeometry = new THREE.PlaneGeometry(50, 50.0);
 
 // Uniforms to pass into the shader
 

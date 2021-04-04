@@ -156,20 +156,18 @@ void main() {
     float scale = 4.0;
     float offset = 1.337;
     
-    float noise1 = psrnoise(vec2(uv.x * scale * applyFrequency(lacunarity, 0.0), uv.y * scale * applyFrequency(lacunarity, 0.0)), vec2(2.0, 4.0), 0.1) * applyAmplitude(persistence, 0.0);
-    float noise2 = psrnoise(vec2(uv.x * scale * applyFrequency(lacunarity, 1.0), uv.y * scale * applyFrequency(lacunarity, 1.0)), vec2(2.0, 6.0), 0.1) * applyAmplitude(persistence, 1.0);
-    float noise3 = psrnoise(vec2(uv.x * scale * applyFrequency(lacunarity, 2.0), uv.y * scale * applyFrequency(lacunarity, 2.0)), vec2(4.0, 8.0), 0.1) * applyAmplitude(persistence, 2.0);
+    float noise1 = psrnoise(vec2(uv.x * scale * applyFrequency(lacunarity, 0.0), uv.y * scale * applyFrequency(lacunarity, 0.0)), vec2(2.0, 4.0), time) * applyAmplitude(persistence, 0.0);
+    float noise2 = psrnoise(vec2(uv.x * scale * applyFrequency(lacunarity, 1.0), uv.y * scale * applyFrequency(lacunarity, 1.0)), vec2(2.0, 6.0), time) * applyAmplitude(persistence, 1.0);
+    float noise3 = psrnoise(vec2(uv.x * scale * applyFrequency(lacunarity, 2.0), uv.y * scale * applyFrequency(lacunarity, 2.0)), vec2(4.0, 8.0), time) * applyAmplitude(persistence, 2.0);
 
     float normNoise = normalize01(noise1 + noise2 + noise3);
 
     vec3 colorDark = vec3(61.0 / 255.0, 2.0 / 255.0, 2.0 / 255.0);
-    vec3 colorBright = vec3(227.0 / 255.0, 21.0 / 255.0, 14.0 / 255.0);
-
+    vec3 colorBright = vec3(219.0 / 255.0, 128.0 / 255.0, 9.0 / 255.0);
+    
     vec3 finalColor = vec3(0.0);
 
     finalColor = mix(colorDark, colorBright, normNoise);
-
-    finalColor *= normNoise;
 
     gl_FragColor = vec4(finalColor, normNoise);
 }
