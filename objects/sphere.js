@@ -1,6 +1,6 @@
 import * as THREE from '../node_modules/three/build/three.module.js';
-import vert from '../shaders/openSimplexTiled/vert.js';
-import frag from '../shaders/openSimplexTiled/frag.js';
+import vert from '../shaders/cellular3d/vert.js';
+import frag from '../shaders/cellular3d/frag.js';
 
 const sphereGeo = new THREE.SphereGeometry(8.0, 32, 32);
 

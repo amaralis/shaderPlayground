@@ -135,7 +135,7 @@ void main() {
     vec2 uv = v_Uv;
     
     float frequency = 1.0;
-    float timeMult = 0.0;
+    float timeMult = 0.2;
     float time = u_Time * timeMult;
 
     float lacunarity = 2.0;
@@ -144,20 +144,20 @@ void main() {
     float offset = 1.337;
 
     // Use fragcoords if noise should be relative to entire screen instead of object uv; will need some rescaling
-    // vec3 P = vec3(gl_FragCoord.xy * scale, time);  
+    // vec2 P = gl_FragCoord.xy * scale;  
     
     // Use uv coords if noise should be relative to uv instead of entire screen
-    vec3 P = vec3(uv.xy * scale, time);  
+    vec2 P = uv.xy * scale;  
     
-    float noise1 = snoise(vec3(offset * 1.0 + P.x * applyFrequency(lacunarity, 0.0), offset * 1.0 + P.y * applyFrequency(lacunarity, 0.0), time + offset * 1.0 + P.z * applyFrequency(lacunarity, 0.0))) * applyAmplitude(persistence, 0.0);
-    float noise2 = snoise(vec3(offset * 2.0 + P.x * applyFrequency(lacunarity, 1.0), offset * 2.0 + P.y * applyFrequency(lacunarity, 1.0), time +  offset * 2.0 + P.z * applyFrequency(lacunarity, 0.0))) * applyAmplitude(persistence, 1.0);
-    float noise3 = snoise(vec3(offset * 3.0 + P.x * applyFrequency(lacunarity, 2.0), offset * 3.0 + P.y * applyFrequency(lacunarity, 2.0), time +  offset * 3.0 + P.z * applyFrequency(lacunarity, 0.0))) * applyAmplitude(persistence, 2.0);
-    float noise4 = snoise(vec3(offset * 4.0 + P.x * applyFrequency(lacunarity, 3.0), offset * 4.0 + P.y * applyFrequency(lacunarity, 3.0), time +  offset * 4.0 + P.z * applyFrequency(lacunarity, 0.0))) * applyAmplitude(persistence, 3.0);
+    float noise1 = snoise(vec3(offset * 1.0 + P.x * applyFrequency(lacunarity, 0.0), offset * 1.0 + P.y * applyFrequency(lacunarity, 0.0), time)) * applyAmplitude(persistence, 0.0);
+    float noise2 = snoise(vec3(offset * 2.0 + P.x * applyFrequency(lacunarity, 1.0), offset * 2.0 + P.y * applyFrequency(lacunarity, 1.0), time)) * applyAmplitude(persistence, 1.0);
+    float noise3 = snoise(vec3(offset * 3.0 + P.x * applyFrequency(lacunarity, 2.0), offset * 3.0 + P.y * applyFrequency(lacunarity, 2.0), time)) * applyAmplitude(persistence, 2.0);
+    float noise4 = snoise(vec3(offset * 4.0 + P.x * applyFrequency(lacunarity, 3.0), offset * 4.0 + P.y * applyFrequency(lacunarity, 3.0), time)) * applyAmplitude(persistence, 3.0);
 
     float normNoise = normalize01(noise1 + noise2 + noise3 + noise4);
 
-    // gl_FragColor = vec4(vec3(noise1), 1.0);
     gl_FragColor = vec4(vec3(normNoise), 1.0);
+    // gl_FragColor = vec4(vec3(normNoise), 1.0);
 }
 `
 

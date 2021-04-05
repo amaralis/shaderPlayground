@@ -1,6 +1,6 @@
 import * as THREE from '../node_modules/three/build/three.module.js';
-import vert from '../shaders/openSimplexLooping/vert.js';
-import frag from '../shaders/openSimplexLooping/frag.js';
+import vert from '../shaders/cellular3d/vert.js';
+import frag from '../shaders/cellular3d/frag.js';
 
 // const planeGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
 // const planeGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
