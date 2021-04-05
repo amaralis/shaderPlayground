@@ -446,13 +446,13 @@ void main() {
     float persistence = 0.5;
     float scale = 4.0;
     float offset = 1.337; 
-    float radius = 100.0;
+    float period = 2.0; // Use integer values maybe
 
+    // Second vec4 ("per", in the notes) is the time in seconds for one full rotation. More than 2 PI seconds may cause artifacts
+    float timeNoise = pnoise(vec4(vec2(uv.x, uv.y), time + cos(uv.x), time + sin(uv.y)), vec4(period));
 
-    float timeNoise = pnoise(vec4(vec2(uv.x, uv.y), time + cos(uv.x), time + sin(uv.y)), vec4(3.0, 3.0, 3.0, 3.0 )) * 1.0;
     
-    // =============== Time loop noise above, texture noise below =============== //
-    
+    // =============== Time loop noise above, texture noise below =============== //    
     
     
     // Use fragcoords if noise should be relative to entire screen instead of object uv
