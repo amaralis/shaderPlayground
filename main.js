@@ -5,6 +5,7 @@ import { OrbitControls } from '../node_modules/three/examples/jsm/controls/Orbit
 import plane from './objects/plane.js';
 import sphere from './objects/sphere.js';
 import cube from './objects/cube.js';
+import points from './objects/points.js';
 
 // Canvas //
 
@@ -23,8 +24,7 @@ const renderer = new THREE.WebGLRenderer({canvas, antialias: true});
 // Camera //
 
 // const camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 0.0, 100 );
-// const camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 0.0, 100 );
-// camera.position.z = 20.0;
+// camera.position.z = 0.1;
 
 const fov = 75; // vertical, in degrees
 const aspect = 2;
@@ -33,7 +33,7 @@ const far = 500;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 camera.position.x = 0;
 camera.position.y = 0;
-camera.position.z = 40;
+camera.position.z = 10;
 
 // Scene //
 
@@ -47,6 +47,7 @@ scene.add(cube);
 sphere.position.x = - 50;
 sphere.rotation.y = Math.PI / 1.2;
 cube.position.x = 50;
+// scene.add(points); // for coords shader
 
 // Testing light
 const color = 0xFFFFAA;
@@ -92,7 +93,6 @@ console.log(canvas.clientWidth, canvas.clientHeight)
 
 function animate(time){ // requestAnimationFrame(callback) passes the time since the page loaded to the callback function
     time *= 0.001; // convert time to seconds
-    // plane.material.uniforms.u_Time.value = clock.getElapsedTime();
     plane.material.uniforms.u_Time.value = time;
     plane.material.uniforms.u_Mouse.value = new THREE.Vector2(mouseX, mouseY);
     sphere.material.uniforms.u_Time.value = time;
@@ -121,7 +121,7 @@ function animate(time){ // requestAnimationFrame(callback) passes the time since
     requestAnimationFrame(animate);
 }
 
-// Orbit Controle //
+// Orbit Controls //
 
 const controls = new OrbitControls(camera, canvas);
 controls.target.set(0,0,0);
@@ -129,24 +129,24 @@ controls.update();
 
 // GUI //
 
-const gui = new dat.GUI();
-gui.closed = false;
+// const gui = new dat.GUI();
+// gui.closed = false;
 
-const folder1 = gui.addFolder('Cube');
-// folder1.open();
-const folder2 = gui.addFolder('Plane');
-// folder2.open();
-const folder3 = gui.addFolder('Sphere');
-// folder3.open();
+// const folder1 = gui.addFolder('Cube');
+// // folder1.open();
+// const folder2 = gui.addFolder('Plane');
+// // folder2.open();
+// const folder3 = gui.addFolder('Sphere');
+// // folder3.open();
 
-folder1.add(cube.position, 'x', -10, 10, 0.1);
-folder1.add(cube.position, 'y', -10, 10, 0.1);
-folder1.add(cube.position, 'z', -10, 10, 0.1);
+// folder1.add(cube.position, 'x', -10, 10, 0.1);
+// folder1.add(cube.position, 'y', -10, 10, 0.1);
+// folder1.add(cube.position, 'z', -10, 10, 0.1);
 
-folder2.add(plane.position, 'x', -10, 10, 0.1);
-folder2.add(plane.position, 'y', -10, 10, 0.1);
-folder2.add(plane.position, 'z', -10, 10, 0.1);
+// folder2.add(plane.position, 'x', -10, 10, 0.1);
+// folder2.add(plane.position, 'y', -10, 10, 0.1);
+// folder2.add(plane.position, 'z', -10, 10, 0.1);
 
-folder3.add(sphere.position, 'x', -10, 10, 0.1);
-folder3.add(sphere.position, 'y', -10, 10, 0.1);
-folder3.add(sphere.position, 'z', -10, 10, 0.1);
+// folder3.add(sphere.position, 'x', -10, 10, 0.1);
+// folder3.add(sphere.position, 'y', -10, 10, 0.1);
+// folder3.add(sphere.position, 'z', -10, 10, 0.1);

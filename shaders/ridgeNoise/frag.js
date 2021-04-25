@@ -128,10 +128,10 @@ void main() {
     // gl_FragColor = testNoise;
 
     // Sharp peaks ridge noise
-    gl_FragColor = ridgeNoise;
+    // gl_FragColor = ridgeNoise;
 
     // Softened ridge noise
-    // gl_FragColor = vec4(1.0 - testNoise.r, 1.0 - testNoise.g, 1.0 - testNoise.b, 1.0);
+    gl_FragColor = vec4(1.0 - testNoise.r, 1.0 - testNoise.g, 1.0 - testNoise.b, 1.0);
     
     // gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 }

@@ -1,9 +1,5 @@
-const glsl = x => x;
 const frag = `
 
-//////////////////////////////// End noise code ////////////////////////////////
-
-//
 // GLSL textureless classic 4D noise "cnoise",
 // with an RSL-style periodic variant "pnoise".
 // Author:  Stefan Gustavson (stefan.gustavson@liu.se)
