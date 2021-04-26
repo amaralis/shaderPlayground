@@ -11,11 +11,13 @@ import points from './objects/points.js';
 // Canvas //
 
 const canvas = document.querySelector('#canvas');
+// canvas.style.width = '100%';
+// canvas.style.height = '100vh';
 const width = window.innerWidth;
 const height = window.innerHeight;
 // const width = canvas.clientWidth;
 // const height = canvas.clientHeight;
-const resolution = width / height;
+// const resolution = width / height;
 
 // Renderer //
 
@@ -94,6 +96,7 @@ window.addEventListener('mousemove', e => {
 plane.material.uniforms.u_Resolution.value = new THREE.Vector2(canvas.clientWidth, canvas.clientHeight);
 sphere.material.uniforms.u_Resolution.value = new THREE.Vector2(canvas.clientWidth, canvas.clientHeight);
 console.log(canvas.clientWidth, canvas.clientHeight)
+console.log(window.innerWidth, window.innerHeight)
 
 function animate(time){ // requestAnimationFrame(callback) passes the time since the page loaded to the callback function
     time *= 0.001; // convert time to seconds

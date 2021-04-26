@@ -405,7 +405,6 @@ vec4 bccNoisePlaneFirst(vec3 X) {
 
 
 varying vec2 v_Uv;
-varying vec4 v_Pos;
 
 uniform vec2 u_Resolution;
 uniform float u_Time;
