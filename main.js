@@ -10,13 +10,23 @@ import points from './objects/points.js';
 
 // Canvas //
 
-const canvas = document.querySelector('#canvas');
-// canvas.style.width = '100%';
-// canvas.style.height = '100vh';
+// const canvas = document.querySelector('#canvas');
+// // canvas.style.width = '100%';
+// // canvas.style.height = '100vh';
+// const width = window.innerWidth;
+// const height = window.innerHeight;
+// // const width = canvas.clientWidth;
+// // const height = canvas.clientHeight;
+
+// Canvas //
+    
+const canvas = document.createElement('canvas');
+document.body.appendChild( canvas );
+canvas.style.width = '100%';
+canvas.style.height = '100%';
+
 const width = window.innerWidth;
 const height = window.innerHeight;
-// const width = canvas.clientWidth;
-// const height = canvas.clientHeight;
 // const resolution = width / height;
 
 // Renderer //
@@ -79,7 +89,8 @@ function resizeRendererToDisplaySize(renderer){
     const needResize = canvas.width !== width || canvas.height !== height;
 
     if(needResize){
-        // renderer.setSize(width, height, false);
+        renderer.setSize(width, height, false);
+        renderer.setPixelRatio(window.devicePixelRatio);
     }
 
     return needResize;
@@ -121,8 +132,6 @@ function animate(time){ // requestAnimationFrame(callback) passes the time since
         // For perspective camera:
         const canvas = renderer.domElement;
         camera.aspect = canvas.clientWidth / canvas.clientHeight;
-        camera.updateProjectionMatrix();
-
         camera.updateProjectionMatrix();
     }
 
